@@ -7,31 +7,31 @@
       </el-header>
       <el-menu router>      
         <el-menu-item index="/info/userManage/userList">
-          <i class="el-icon-menu"></i>
+          <i class="el-icon-setting"></i>
           <span slot="title">用户管理(平台)</span>
         </el-menu-item>
         <el-menu-item index="/info/customerManage/customerList">
-          <i class="el-icon-menu"></i>
+          <i class="el-icon-setting"></i>
           <span slot="title">宠主管理(平台)</span>
         </el-menu-item>
         <el-menu-item index="/info/storeManage/storeList">
-        <i class="el-icon-menu"></i>
+        <i class="el-icon-setting"></i>
         <span slot="title">门店管理(门店)</span>
         </el-menu-item>
         <el-menu-item index="/info/petManage/petList">
-          <i class="el-icon-menu"></i>
+          <i class="el-icon-setting"></i>
           <span slot="title">宠物管理(门店)</span>
         </el-menu-item>
         <el-menu-item index="/info/commodityManage/commodityList">
-          <i class="el-icon-menu"></i>
+          <i class="el-icon-setting"></i>
           <span slot="title">宠物周边管理(门店)</span>
         </el-menu-item>
          <el-menu-item index="/info/serverManage/serverList">
-          <i class="el-icon-menu"></i>
+          <i class="el-icon-setting"></i>
           <span slot="title">服务管理(门店)</span>
         </el-menu-item>
         <el-menu-item index="/info/orderManage/orderList">
-          <i class="el-icon-menu"></i>
+          <i class="el-icon-setting"></i>
           <span slot="title">订单管理(门店)</span>
         </el-menu-item>
       </el-menu>

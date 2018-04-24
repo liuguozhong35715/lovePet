@@ -25,6 +25,8 @@ import commodityList from "@/components/app/commodityManage/commodityList.vue"
 import serverList from "@/components/app/serverManage/serverList.vue"
 
 import orderList from "@/components/app/orderManage/orderList.vue"
+import orderPetList from "@/components/app/orderManage/orderPetList.vue"
+import orderServerList from "@/components/app/orderManage/orderServerList.vue"
 
 Vue.use(Router)
 
@@ -106,6 +108,14 @@ export default new Router({
             {
               path: 'orderList',
               component: orderList 
+            },
+            {
+              path: 'orderPetList',
+              component: orderPetList 
+            },
+            {
+              path: 'orderServerList',
+              component: orderServerList 
             }
           ] 
         }

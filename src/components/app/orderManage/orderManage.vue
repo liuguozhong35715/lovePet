@@ -1,7 +1,8 @@
 <template>
     <el-tabs v-model="activeName" @tab-click="goToList">
-        <el-tab-pane label="商品订单列表" name="orderList" ><router-view></router-view></el-tab-pane>
-        <el-tab-pane label="服务订单列表" name="second"><router-view></router-view></el-tab-pane>
+        <el-tab-pane label="宠物周边订单列表" name="orderList" ><router-view></router-view></el-tab-pane>
+        <el-tab-pane label="服务订单列表" name="orderServerList"><router-view></router-view></el-tab-pane>
+        <el-tab-pane label="宠物订单列表" name="orderPetList"><router-view></router-view></el-tab-pane>
     </el-tabs> 
 </template>
 
