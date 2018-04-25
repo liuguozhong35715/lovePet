@@ -1,6 +1,7 @@
 <template>
     <el-tabs v-model="activeName" @tab-click="goToList">
         <el-tab-pane label="门店列表" name="storeList" ><router-view></router-view></el-tab-pane>
+        <el-tab-pane label="新增门店" name="storeAdd" ><router-view></router-view></el-tab-pane>
     </el-tabs> 
 </template>
 

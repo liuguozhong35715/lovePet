@@ -17,12 +17,16 @@ import userCould from "@/components/app/userManage/userCould.vue"
 import customerList from "@/components/app/customerManage/customerList.vue"
 
 import storeList from "@/components/app/storeManage/storeList.vue"
+import storeAdd from "@/components/app/storeManage/storeAdd.vue"
 
 import petList from "@/components/app/petManage/petList.vue"
+import petAdd from "@/components/app/petManage/petAdd.vue"
 
 import commodityList from "@/components/app/commodityManage/commodityList.vue"
+import commodityAdd from "@/components/app/commodityManage/commodityAdd.vue"
 
 import serverList from "@/components/app/serverManage/serverList.vue"
+import serverAdd from "@/components/app/serverManage/serverAdd.vue"
 
 import orderList from "@/components/app/orderManage/orderList.vue"
 import orderPetList from "@/components/app/orderManage/orderPetList.vue"
@@ -68,6 +72,10 @@ export default new Router({
             {
               path: 'storeList',
               component: storeList 
+            },
+            {
+              path: 'storeAdd',
+              component: storeAdd 
             }
           ] 
         },
@@ -78,6 +86,10 @@ export default new Router({
             {
               path: 'petList',
               component: petList 
+            },
+            {
+              path: 'petAdd',
+              component: petAdd 
             }
           ] 
         },
@@ -88,6 +100,10 @@ export default new Router({
             {
               path: 'commodityList',
               component: commodityList 
+            },
+            {
+              path: 'commodityAdd',
+              component: commodityAdd
             }
           ]
         },
@@ -98,6 +114,10 @@ export default new Router({
             {
               path: 'serverList',
               component: serverList 
+            },
+            {
+              path: 'serverAdd',
+              component: serverAdd 
             }
           ] 
         },

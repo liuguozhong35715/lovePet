@@ -1,6 +1,7 @@
 <template>
     <el-tabs v-model="activeName" @tab-click="goToList">
         <el-tab-pane label="服务列表" name="serverList" ><router-view></router-view></el-tab-pane>
+        <el-tab-pane label="新增服务" name="serverAdd" ><router-view></router-view></el-tab-pane>
     </el-tabs> 
 </template>
 

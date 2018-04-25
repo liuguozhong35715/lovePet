@@ -24,7 +24,7 @@
         </el-menu-item>
         <el-menu-item index="/info/commodityManage/commodityList">
           <i class="el-icon-setting"></i>
-          <span slot="title">宠物周边管理(门店)</span>
+          <span slot="title">宠物商品管理(门店)</span>
         </el-menu-item>
          <el-menu-item index="/info/serverManage/serverList">
           <i class="el-icon-setting"></i>

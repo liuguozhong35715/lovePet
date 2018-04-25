@@ -1,6 +1,7 @@
 <template>
     <el-tabs v-model="activeName" @tab-click="goToList">
-        <el-tab-pane label="宠物周边列表" name="commodityList" ><router-view></router-view></el-tab-pane>
+        <el-tab-pane label="宠物商品列表" name="commodityList" ><router-view></router-view></el-tab-pane>
+        <el-tab-pane label="新增宠物商品" name="commodityAdd" ><router-view></router-view></el-tab-pane>
     </el-tabs> 
 </template>
 
