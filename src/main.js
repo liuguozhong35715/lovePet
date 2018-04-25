@@ -9,10 +9,13 @@ Vue.use(ElementUI);
 
 Vue.config.productionTip = false
 
+import store from "./components/store/store"
+
 
 new Vue({
   el: '#app',
   router,
+  store,
   template: `<router-view />`
 })
 
