@@ -40,7 +40,7 @@
     <el-main>
       <router-view></router-view>
       <div id="userMsg">
-        <img src="../../assets/logo.png" alt="" style="width:20px;height:20px">
+        <img src="../../assets/images/lovePetLogo.png" alt="" style="width:25px;height:25px">
         <el-dropdown trigger="click" @command="handleCommand">
           <span class="el-dropdown-link">
             {{userName}}<i class="el-icon-arrow-down el-icon--right"></i>
@@ -116,7 +116,14 @@ export default {
 #userMsg {
   position: absolute;
   right: 40px;
-  top: 25px;
+  top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+#userMsg>img{
+  margin-right: 12px;
+  border-radius: 12px;
 }
 
 .el-menu-item {
@@ -132,6 +139,10 @@ export default {
 }
 
 .el-tabs__item:hover {
+  color: #f56c6c;
+}
+
+.el-menu-item.is-active{
   color: #f56c6c;
 }
 </style>

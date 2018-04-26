@@ -9,6 +9,7 @@ export default {
         PetTotal: 1,
         ServerCurpage: 1,
         ServerTotal: 1,
+        allData:[],
         goodsListAll:[],
         PetListAll:[],
         ServerListAll:[],
@@ -44,6 +45,18 @@ export default {
             region: "waitSend",
             address:"未留地址",
             phone:"未留电话"
+        },
+        goodsFormInline:{
+            search:"",
+            region:"all"
+        },
+        serverFormInline:{
+            search:"",
+            region:"all"
+        },
+        petsFormInline:{
+            search:"",
+            region:"all"
         }
     },
     mutations: {
@@ -86,9 +99,9 @@ export default {
             state.ServerTotal = state.ServerListAll.length;
             state.PetTotal = state.PetListAll.length;
 
-            state.orderListData =  state.goodsListAll.slice(0,6)
-            state.orderPetData =  state.PetListAll.slice(0,6)
-            state.orderServerData =  state.ServerListAll.slice(0,6)
+            state.orderListData =  state.goodsListAll.slice(0,5)
+            state.orderPetData =  state.PetListAll.slice(0,5)
+            state.orderServerData =  state.ServerListAll.slice(0,5)
         },
         willUpdata(state, payload) {
             state[payload.type] = false;
@@ -114,18 +127,40 @@ export default {
             state[payload.type] = true;
         },
         goodsCurrentChange(state,payload){
-            state.orderListData =  state.goodsListAll.slice((payload - 1) * 6,(payload - 1) * 6 + 6)
+            state.orderListData =  state.goodsListAll.slice((payload - 1) * 5,(payload - 1) * 5 + 5)
         },
         serverCurrentChange(state,payload){
-            state.orderServerData =  state.ServerListAll.slice((payload - 1) * 6,(payload - 1) * 6 + 6)
+            state.orderServerData =  state.ServerListAll.slice((payload - 1) * 5,(payload - 1) * 5 + 5)
         },
         petCurrentChange(state,payload){
-            state.orderPetData =  state.PetListAll.slice((payload - 1) * 6,(payload - 1) * 6 + 6)
+            state.orderPetData =  state.PetListAll.slice((payload - 1) * 5,(payload - 1) * 5 + 5)
+        },
+        searchData(state,payload){
+            this.commit("order/showDataAll", state.allData)
+            let dataList = ["goodsListAll","PetListAll","ServerListAll"];
+            dataList.splice(dataList.indexOf(payload.listData),1);            
+            let searchArr = [...state[dataList[0]],...state[dataList[1]]];
+            for(let i = 0;i < state[payload.listData].length;i++){
+                if(state[payload.type].region !== "all"){
+                    if( (state[payload.listData][i][payload.whatType][payload.whatName].match(state[payload.type].search) ||
+                       state[payload.listData][i].shops.shopName.match(state[payload.type].search)) &&
+                       state[payload.listData][i].status === state[payload.type].region){
+                        searchArr.push(state[payload.listData][i])
+                   }
+                }else{
+                   if( state[payload.listData][i][payload.whatType][payload.whatName].match(state[payload.type].search) ||
+                       state[payload.listData][i].shops.shopName.match(state[payload.type].search)){
+                        searchArr.push(state[payload.listData][i])
+                   }
+                }                
+            }  
+            this.commit("order/showDataAll", searchArr)        
         }
     },
     actions: {
         async getOrder(context) {
             const { data } = await axios.get(`/orderManage?type=0&shopManagersId=5ae179ad881a16051f703dc4`);
+            context.state.allData = data;
             context.commit("showDataAll", data)
         },
         async upLoad(context, payload) {
