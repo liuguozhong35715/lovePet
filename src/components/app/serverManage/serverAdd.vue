@@ -160,9 +160,6 @@ export default {
     ...mapActions("server", ["submitForm"]),
     ...mapMutations("server", ["sureadd"])
   },
-  // created() {
-  //   this.submitForm();
-  // },
   computed: {
     ...mapState("server", ["add", "isAdd"])
   }

@@ -4,13 +4,22 @@ const store = {
     state: {
         isList: true,
         isAdd: true,
-        service: [{}],
+        service: [],
+        // select:"",
+        select:{
+            sel:""
+        },
+        input:{
+            zhi:""
+        },
         add: {
             serviceName: "",
             serviceType: "",
             serviceTime: "",
             servicePrice: "",
-            theStores: ""
+            theStores: "",
+            storeId:"0ae0cd0d0b000000dcdffc00",//门店ID
+            manageId:"9ae9cd9d9b999999dcdffc99"//管理员ID
         },
         update: {
             serviceName: "",
@@ -23,7 +32,47 @@ const store = {
     },
     mutations: {
         addPet(state, parm) {
-            this.state.server.service = parm
+            // let isFlag
+            if(this.state.server.select.sel == "服务名称")
+            {
+                // isFlag = "serviceName"
+                if(this.state.server.input.zhi){
+                    for(let i = 0; i < parm.length; i++){
+                        if(parm[i].serviceName == this.state.server.input.zhi){
+                            this.state.server.service.push(parm[i])
+                        }
+                    }
+                }
+                else{
+                    this.state.server.service = parm            
+                }
+            }
+            else if(this.state.server.select.sel == "服务类型"){
+                // isFlag = "serviceType"
+                if(this.state.server.input.zhi){
+                    for(let i = 0; i < parm.length; i++){
+                        if(parm[i].serviceType == this.state.server.input.zhi){
+                            this.state.server.service.push(parm[i])
+                        }
+                    }
+                }
+                else{
+                    this.state.server.service = parm            
+                }
+            }else{
+                // isFlag = "servicePrice"  
+                if(this.state.server.input.zhi){
+                    for(let i = 0; i < parm.length; i++){
+                        if(parm[i].servicePrice == this.state.server.input.zhi){
+                            this.state.server.service.push(parm[i])
+                        }
+                    }
+                }  
+                else{
+                    this.state.server.service = parm            
+                }            
+            }
+            // console.log("zhizhizhi:",isFlag)            
         },
         updateRow(state, rows) {//点击修改
             state.isList = !state.isList;
@@ -47,6 +96,10 @@ const store = {
         }
     },
     actions: {
+        async search(context){
+            context.state.service = []
+            await context.dispatch('getPet');
+        },
         //显示
         async getPet(context) {
             const { data } = await axios("/serverManage");
@@ -57,8 +110,6 @@ const store = {
             let add = context.state.add
             if (context.state.add.serviceName) {
                 context.state.isAdd = !context.state.isAdd
-                // context.$router.push({path:"/info/serverManage/serverList"})
-                
                 // const data = await axios.post("/serverManage", serviceName, serviceType, serviceTime, servicePrice, theStores);
                 // context.state[serviceName] = serviceName;
                 await fetch("/serverManage", {

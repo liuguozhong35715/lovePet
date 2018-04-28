@@ -1,6 +1,16 @@
 <template>
 <div>
   <div v-if="isList">
+    <div style="margin-top: 15px;">
+      <el-input placeholder="请输入内容" v-model="input.zhi" class="input-with-select">
+        <el-select v-model="select.sel" slot="prepend" placeholder="请选择">
+          <el-option label="服务名称" value="服务名称"></el-option>
+          <el-option label="服务类型" value="服务类型"></el-option>
+          <el-option label="服务价格" value="服务价格"></el-option>
+        </el-select>
+        <el-button slot="append" icon="el-icon-search" @click="search"></el-button>
+      </el-input>
+    </div>
     <el-table
       :data="service"
       height="530"
@@ -32,18 +42,21 @@
             <!-- <el-form-item label="服务规格">
               <span>{{ props.row.serviceDetail }}</span>
             </el-form-item> -->
-            <el-form-item label="id">
+            <el-form-item label="服务ID">
               <span>{{ props.row._id }}</span>
             </el-form-item>
             <el-form-item label="所属门店">
               <span>{{ props.row.theStores }}</span>
             </el-form-item>
-            <!-- <el-form-item label="门店id">
+            <el-form-item label="门店ID">
               <span>{{ props.row.storeId }}</span>
             </el-form-item>
-            <el-form-item label="门店地址">
+            <!-- <el-form-item label="门店地址">
               <span>{{ props.row.address }}</span>
             </el-form-item> -->
+            <el-form-item label="管理员ID">
+              <span>{{ props.row.manageId }}</span>
+            </el-form-item>
           </el-form>
         </template>
       </el-table-column>
@@ -118,18 +131,24 @@
 </template>
 
 <style>
-.demo-table-expand {
-  font-size: 0;
-}
-.demo-table-expand label {
-  width: 90px;
-  color: #99a9bf;
-}
-.demo-table-expand .el-form-item {
-  margin-right: 0;
-  margin-bottom: 0;
-  width: 50%;
-}
+  .demo-table-expand {
+    font-size: 0;
+  }
+  .demo-table-expand label {
+    width: 90px;
+    color: #99a9bf;
+  }
+  .demo-table-expand .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 50%;
+  }
+  .el-select .el-input {
+    width: 130px;
+  }
+  .input-with-select .el-input-group__prepend {
+    background-color: #fff;
+  }
 </style>
 
 <script>
@@ -138,14 +157,14 @@ export default {
   name: "server",
   methods: {
     ...mapActions("server", ["getPet"]),
-    ...mapActions("server", ["deleteRow","sure"]),
+    ...mapActions("server", ["deleteRow","sure","search"]),
     ...mapMutations("server", ["updateRow","resetForm"])
   },
   created() {
     this.getPet();
   },
   computed: {
-    ...mapState("server", ["service","isList","update"])
+    ...mapState("server", ["service","isList","update","select","input"])
   }
 };
 </script>
