@@ -1,9 +1,27 @@
 <template>
   <div>
     <div v-if="isServerList">
+      <el-form :inline="true" :model="serverFormInline" class="demo-form-inline">
+        <el-form-item>
+          <el-input v-model="serverFormInline.search" placeholder="服务名称/所属店铺"></el-input>
+        </el-form-item>
+        <el-form-item label="订单状态">
+        <el-select v-model="serverFormInline.region" placeholder="请选择活动区域">
+          <el-option label="全部" value="all"></el-option>
+          <el-option label="待服务" value="waitSend"></el-option>
+          <el-option label="已服务" value="hasSend"></el-option>
+          <el-option label="待评价" value="waitDiscuss"></el-option>
+          <el-option label="已完成" value="complete"></el-option>
+        </el-select>
+      </el-form-item> 
+        <el-form-item>
+          <el-button type="primary" @click="searchData({type:'serverFormInline',listData:'ServerListAll',whatType:'servers',whatName:'serverType'})" size="mini">查询</el-button>
+        </el-form-item>
+      </el-form>
       <el-table
         :data="orderServerData"
-        style="width: 100%">
+        style="width: 100%"
+         height="445px">
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" inline class="demo-table-expand">
@@ -16,10 +34,10 @@
               <el-form-item label="顾客昵称">
                 <span>{{props.row.customers.memberAcount}}</span>
               </el-form-item>
-              <el-form-item label="预留电话">
+              <el-form-item label="顾客电话">
                 <span>{{props.row.customers.memberPhone}}</span>
               </el-form-item>
-              <el-form-item label="顾客电话">
+              <el-form-item label="预约电话">
                 <span>{{props.row.phone}}</span>
               </el-form-item>
               <el-form-item label="服务时长"  v-if="true">
@@ -77,7 +95,7 @@
       </el-pagination>
     </div>
 
-    <el-form ref="form" :model="serverForm" label-width="80px" v-else>
+    <el-form ref="form" :model="serverForm" label-width="80px" v-else id="#serverForm">
         <el-form-item label="订单号">
           <el-input v-model="serverForm.id" disabled></el-input>
         </el-form-item>
@@ -116,13 +134,13 @@ export default {
   watch: {},
   methods: {
     ...mapActions("order", ["getOrder","upLoad","del"]),
-    ...mapMutations("order", ["willUpdata", "cancelUpdata","serverCurrentChange"]),
+    ...mapMutations("order", ["willUpdata", "cancelUpdata","serverCurrentChange","searchData"]),
     onSubmit() {
       this.upLoad({type:"serverForm",isDisplay:"isServerList"});
     }
   },
   computed: {
-    ...mapState("order", ["orderServerData", "isServerList", "serverForm","ServerCurpage","ServerTotal"])
+    ...mapState("order", ["orderServerData", "isServerList", "serverForm","ServerCurpage","ServerTotal","serverFormInline"])
   }
 };
 </script>
@@ -141,7 +159,11 @@ export default {
   width: 50%;
 }
 
-.el-input{
+#serverForm .el-input{
+  width: 400px;
+}
+
+#serverForm .el-input{
   width: 400px;
 }
 </style>

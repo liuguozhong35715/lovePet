@@ -1,9 +1,27 @@
 <template>
   <div>
     <div v-if="isPetList">
+      <el-form :inline="true" :model="petsFormInline" class="demo-form-inline">
+        <el-form-item>
+          <el-input v-model="petsFormInline.search" placeholder="宠物品种/所属店铺"></el-input>
+        </el-form-item>
+        <el-form-item label="订单状态">
+        <el-select v-model="petsFormInline.region" placeholder="请选择活动区域">
+          <el-option label="全部" value="all"></el-option>
+          <el-option label="待发货" value="waitSend"></el-option>
+          <el-option label="已发货" value="hasSend"></el-option>
+          <el-option label="待评价" value="waitDiscuss"></el-option>
+          <el-option label="已完成" value="complete"></el-option>
+        </el-select>
+      </el-form-item> 
+        <el-form-item>
+          <el-button type="primary" @click="searchData({type:'petsFormInline',listData:'PetListAll',whatType:'pets',whatName:'variety'})" size="mini">查询</el-button>
+        </el-form-item>
+      </el-form>
       <el-table
         :data="orderPetData"
         style="width: 100%"
+         height="445px"
         >
         <el-table-column type="expand">
           <template slot-scope="props">
@@ -17,10 +35,10 @@
               <el-form-item label="顾客昵称">
                 <span>{{props.row.customers.memberAcount}}</span>
               </el-form-item>
-              <el-form-item label="预留电话">
+              <el-form-item label="顾客电话">
                 <span>{{props.row.customers.memberPhone}}</span>
               </el-form-item>
-              <el-form-item label="顾客电话">
+              <el-form-item label="收货电话">
                 <span>{{props.row.phone}}</span>
               </el-form-item>
               <el-form-item label="数量" v-if="true">
@@ -87,7 +105,7 @@
       </el-pagination>
     </div>
 
-    <el-form ref="form" :model="petForm" label-width="80px" v-else>
+    <el-form ref="form" :model="petForm" label-width="80px" v-else id="petFormstyle">
       <el-form-item label="订单号">
           <el-input v-model="petForm.id" disabled></el-input>
         </el-form-item>
@@ -129,13 +147,13 @@ export default {
   watch: {},
   methods: {
     ...mapActions("order", ["getOrder","upLoad","del"]),
-    ...mapMutations("order", ["willUpdata", "cancelUpdata","petCurrentChange"]),
+    ...mapMutations("order", ["willUpdata", "cancelUpdata","petCurrentChange","searchData"]),
     onSubmit() {
       this.upLoad({type:"petForm",isDisplay:"isPetList"});
     }
   },
   computed: {
-    ...mapState("order", ["orderPetData", "isPetList", "petForm","PetCurpage","PetTotal"])
+    ...mapState("order", ["orderPetData", "isPetList", "petForm","PetCurpage","PetTotal","petsFormInline"])
   }
 };
 </script>
@@ -154,7 +172,7 @@ export default {
   width: 50%;
 }
 
-.el-input{
+#petFormstyle .el-input{
   width: 400px;
 }
 </style>
