@@ -2,38 +2,38 @@
  <el-container style="background-color:#f6f7f9">    
     <el-aside width="200px" :style="asideStyle" >
       <el-header style=" font-size: 12px; height: 71px;">
-          <img src="../../assets/images/lovePetLogo.png" alt="" style="width:30px">
+          <img src="../../assets/images/lovePetLogo.png" alt="" style="width:40px">
           <span class="logoText">爱宠邦<p class="logoEngText">LovePets System</p>
           </span>
       </el-header>
       <el-menu router>      
-        <el-menu-item index="/info/userManage/userList">
+        <el-menu-item index="/info/userManage/userList" :disabled="isSuper">
           <i class="el-icon-service"></i>
-          <span slot="title">用户管理(平台)</span>
+          <span slot="title">用户管理</span>
         </el-menu-item>
-        <el-menu-item index="/info/customerManage/customerList">
+        <el-menu-item index="/info/customerManage/customerList" :disabled="isSuper">
           <i class="el-icon-setting"></i>
-          <span slot="title">宠主管理(平台)</span>
+          <span slot="title">宠主管理</span>
         </el-menu-item>
-        <el-menu-item index="/info/storeManage/storeList">
+        <el-menu-item index="/info/storeManage/storeList" :disabled="!isSuper">
         <i class="el-icon-menu"></i>
-        <span slot="title">门店管理(门店)</span>
+        <span slot="title">门店管理</span>
         </el-menu-item>
-        <el-menu-item index="/info/petManage/petList">
+        <el-menu-item index="/info/petManage/petList" :disabled="!isSuper">
           <i class="el-icon-star-on"></i>
-          <span slot="title">宠物管理(门店)</span>
+          <span slot="title">宠物管理</span>
         </el-menu-item>
-        <el-menu-item index="/info/commodityManage/commodityList">
+        <el-menu-item index="/info/commodityManage/commodityList" :disabled="!isSuper">
           <i class="el-icon-goods"></i>
-          <span slot="title">宠物商品(门店)</span>
+          <span slot="title">宠物商品</span>
         </el-menu-item>
-         <el-menu-item index="/info/serverManage/serverList">
+         <el-menu-item index="/info/serverManage/serverList" :disabled="!isSuper">
           <i class="el-icon-time"></i>
-          <span slot="title">服务管理(门店)</span>
+          <span slot="title">服务管理</span>
         </el-menu-item>
         <el-menu-item index="/info/orderManage/orderList">
           <i class="el-icon-document"></i>
-          <span slot="title">订单管理(门店)</span>
+          <span slot="title">订单管理</span>
         </el-menu-item>
       </el-menu>
     </el-aside>
@@ -42,7 +42,7 @@
       <div id="userMsg">
         <img src="../../assets/images/lovePetLogo.png" alt="" style="width:25px;height:25px">
         <el-dropdown trigger="click" @command="handleCommand">
-          <span class="el-dropdown-link">
+          <span class="el-dropdown-link" style="color: #f56c6c;">
             {{userName}}<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
@@ -65,7 +65,8 @@ export default {
       asideStyle: {
         height: window.innerHeight + "px",
         backgroundColor: "#fff"
-      }
+      },
+      isSuper:true
     };
   },
   methods: {
@@ -73,7 +74,11 @@ export default {
       this.$router.push(`${command}`);
     }
   },
-  created() {}
+  created() {
+    if(sessionStorage.userType == "1"){
+      this.isSuper = false
+    }
+  }
 };
 </script>
 
@@ -116,14 +121,16 @@ export default {
 #userMsg {
   position: absolute;
   right: 40px;
-  top: 20px;
+  top: 12px;
   display: flex;
   align-items: center;
 }
 
 #userMsg>img{
   margin-right: 12px;
-  border-radius: 12px;
+  border-radius: 20px;
+  border: 2px solid rgb(235, 226, 226);
+  padding: 3px;
 }
 
 .el-menu-item {

@@ -76,11 +76,11 @@ export default {
         }`
       );
       if (data.length > 0 && this.formData.userName && this.formData.passWord) {
-        if (data[0].userStatus === "未审核") {
+        if (data[0].userStatus === "0") {
           this.isAcc = true;
           this.isError = false;
           this.isRefuse = false;
-        } else if (data[0].userStatus === "未通过") {
+        } else if (data[0].userStatus === "2") {
           this.isAcc = false;
           this.isError = false;
           this.isRefuse = true;

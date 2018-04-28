@@ -95,7 +95,7 @@
       </el-pagination>
     </div>
 
-    <el-form ref="form" :model="serverForm" label-width="80px" v-else id="#serverForm">
+    <el-form ref="form" :model="serverForm" label-width="80px" v-else id="serverForm">
         <el-form-item label="订单号">
           <el-input v-model="serverForm.id" disabled></el-input>
         </el-form-item>
@@ -159,9 +159,7 @@ export default {
   width: 50%;
 }
 
-#serverForm .el-input{
-  width: 400px;
-}
+
 
 #serverForm .el-input{
   width: 400px;
