@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import login from "@/components/app/login.vue"
 import info from "@/components/app/info.vue"
+import reg from "@/components/app/reg.vue"
+import waitCheck from "@/components/app/waitCheck.vue"
 
 import userManage from "@/components/app/userManage/userManage.vue"
 import customerManage from "@/components/app/customerManage/customerManage.vue"
@@ -145,6 +147,16 @@ export default new Router({
       path: '/',
       name: 'login',
       component: login
+    },
+    {
+      path: '/reg',
+      name: 'reg',
+      component: reg
+    },
+    {
+      path: '/waitCheck',
+      name: 'waitCheck',
+      component: waitCheck
     }
   ]
 })
