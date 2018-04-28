@@ -9,10 +9,10 @@ export default {
         PetTotal: 1,
         ServerCurpage: 1,
         ServerTotal: 1,
-        allData:[],
-        goodsListAll:[],
-        PetListAll:[],
-        ServerListAll:[],
+        allData: [],
+        goodsListAll: [],
+        PetListAll: [],
+        ServerListAll: [],
         orderListData: [],
         orderPetData: [],
         orderServerData: [],
@@ -20,43 +20,43 @@ export default {
         isPetList: true,
         isServerList: true,
         goodsForm: {
-            id:"错误订单",
+            id: "错误订单",
             name: "猫粮1",
             price: 300,
             count: 3,
             region: "waitSend",
-            address:"未留地址",
-            phone:"未留电话"
+            address: "未留地址",
+            phone: "未留电话"
         },
         petForm: {
-            id:"错误订单",
+            id: "错误订单",
             name: "猫粮1",
             price: 300,
             count: 3,
             region: "waitSend",
-            address:"未留地址",
-            phone:"未留电话"
+            address: "未留地址",
+            phone: "未留电话"
         },
         serverForm: {
-            id:"错误订单",
+            id: "错误订单",
             name: "猫粮1",
             price: 300,
             count: 3,
             region: "waitSend",
-            address:"未留地址",
-            phone:"未留电话"
+            address: "未留地址",
+            phone: "未留电话"
         },
-        goodsFormInline:{
-            search:"",
-            region:"all"
+        goodsFormInline: {
+            search: "",
+            region: "all"
         },
-        serverFormInline:{
-            search:"",
-            region:"all"
+        serverFormInline: {
+            search: "",
+            region: "all"
         },
-        petsFormInline:{
-            search:"",
-            region:"all"
+        petsFormInline: {
+            search: "",
+            region: "all"
         }
     },
     mutations: {
@@ -67,29 +67,29 @@ export default {
             for (let i = 0; i < payload.length; i++) {
                 if (payload[i].status == "waitSend") {
                     payload[i].statusCN = "待发货";
-                }else if(payload[i].status == "hasSend"){
+                } else if (payload[i].status == "hasSend") {
                     payload[i].statusCN = "已发货";
-                }else if(payload[i].status == "waitDiscuss"){
+                } else if (payload[i].status == "waitDiscuss") {
                     payload[i].statusCN = "待评价";
-                }else if(payload[i].status == "complete"){
+                } else if (payload[i].status == "complete") {
                     payload[i].statusCN = "已完成";
-                }else{
+                } else {
                     console.log("error")
                 }
                 if (payload[i].type == "goods") {
                     payload[i].total = payload[i].goods.goodsPrice * payload[i].counts;
-                    state.goodsListAll.push(payload[i]);                   
+                    state.goodsListAll.push(payload[i]);
                 } else if (payload[i].type == "servers") {
                     if (payload[i].status == "waitSend") {
                         payload[i].statusCN = "待服务";
-                    }else if(payload[i].status == "hasSend"){
+                    } else if (payload[i].status == "hasSend") {
                         payload[i].statusCN = "已服务";
                     }
                     payload[i].total = payload[i].servers.serverPrice;
-                    state.ServerListAll.push(payload[i]);                   
+                    state.ServerListAll.push(payload[i]);
                 } else if (payload[i].type == "pets") {
                     payload[i].total = payload[i].pets.price * payload[i].counts;
-                    state.PetListAll.push(payload[i]);                    
+                    state.PetListAll.push(payload[i]);
                 } else {
                     console.log("error")
                 }
@@ -99,9 +99,9 @@ export default {
             state.ServerTotal = state.ServerListAll.length;
             state.PetTotal = state.PetListAll.length;
 
-            state.orderListData =  state.goodsListAll.slice(0,5)
-            state.orderPetData =  state.PetListAll.slice(0,5)
-            state.orderServerData =  state.ServerListAll.slice(0,5)
+            state.orderListData = state.goodsListAll.slice(0, 5)
+            state.orderPetData = state.PetListAll.slice(0, 5)
+            state.orderServerData = state.ServerListAll.slice(0, 5)
         },
         willUpdata(state, payload) {
             state[payload.type] = false;
@@ -126,45 +126,60 @@ export default {
         cancelUpdata(state, payload) {
             state[payload.type] = true;
         },
-        goodsCurrentChange(state,payload){
-            state.orderListData =  state.goodsListAll.slice((payload - 1) * 5,(payload - 1) * 5 + 5)
+        goodsCurrentChange(state, payload) {
+            state.orderListData = state.goodsListAll.slice((payload - 1) * 5, (payload - 1) * 5 + 5)
         },
-        serverCurrentChange(state,payload){
-            state.orderServerData =  state.ServerListAll.slice((payload - 1) * 5,(payload - 1) * 5 + 5)
+        serverCurrentChange(state, payload) {
+            state.orderServerData = state.ServerListAll.slice((payload - 1) * 5, (payload - 1) * 5 + 5)
         },
-        petCurrentChange(state,payload){
-            state.orderPetData =  state.PetListAll.slice((payload - 1) * 5,(payload - 1) * 5 + 5)
+        petCurrentChange(state, payload) {
+            state.orderPetData = state.PetListAll.slice((payload - 1) * 5, (payload - 1) * 5 + 5)
         },
-        searchData(state,payload){
+        searchData(state, payload) {
             this.commit("order/showDataAll", state.allData)
-            let dataList = ["goodsListAll","PetListAll","ServerListAll"];
-            dataList.splice(dataList.indexOf(payload.listData),1);            
-            let searchArr = [...state[dataList[0]],...state[dataList[1]]];
-            for(let i = 0;i < state[payload.listData].length;i++){
-                if(state[payload.type].region !== "all"){
-                    if( (state[payload.listData][i][payload.whatType][payload.whatName].match(state[payload.type].search) ||
-                       state[payload.listData][i].shops.shopName.match(state[payload.type].search)) &&
-                       state[payload.listData][i].status === state[payload.type].region){
+            let dataList = ["goodsListAll", "PetListAll", "ServerListAll"];
+            dataList.splice(dataList.indexOf(payload.listData), 1);
+            let searchArr = [...state[dataList[0]], ...state[dataList[1]]];
+            for (let i = 0; i < state[payload.listData].length; i++) {
+                if (state[payload.type].region !== "all") {
+                    if ((state[payload.listData][i][payload.whatType][payload.whatName].match(state[payload.type].search) ||
+                        state[payload.listData][i].shops.shopName.match(state[payload.type].search)) &&
+                        state[payload.listData][i].status === state[payload.type].region) {
                         searchArr.push(state[payload.listData][i])
-                   }
-                }else{
-                   if( state[payload.listData][i][payload.whatType][payload.whatName].match(state[payload.type].search) ||
-                       state[payload.listData][i].shops.shopName.match(state[payload.type].search)){
+                    }
+                } else {
+                    if (state[payload.listData][i][payload.whatType][payload.whatName].match(state[payload.type].search) ||
+                        state[payload.listData][i].shops.shopName.match(state[payload.type].search)) {
                         searchArr.push(state[payload.listData][i])
-                   }
-                }                
-            }  
-            this.commit("order/showDataAll", searchArr)        
+                    }
+                }
+            }
+            this.commit("order/showDataAll", searchArr)
         }
     },
     actions: {
         async getOrder(context) {
-            const { data } = await axios.get(`/orderManage?type=0&shopManagersId=5ae179ad881a16051f703dc4`);
-            context.state.allData = data;
-            context.commit("showDataAll", data)
+            let userId = sessionStorage.userId;
+            let userType = sessionStorage.userType;
+            console.log(userId, userType)
+            if (userType == 0) {
+                console.log("in")
+                const { data } = await axios.get(`/orderManage?type=0&shopManagersId=${userId}`);
+                context.state.allData = data;
+                context.commit("showDataAll", data)
+            } else if (userType == 1) {
+                const { data } = await axios.get(`/orderManage`);
+                context.state.allData = data;
+                context.commit("showDataAll", data)
+            } else {
+                const { data } = [];
+                context.state.allData = data;
+                context.commit("showDataAll", data)
+            }
+
         },
         async upLoad(context, payload) {
-            const { data } = await axios.put(`/orderManage/${context.state[payload.type].id}`,context.state[payload.type]);
+            const { data } = await axios.put(`/orderManage/${context.state[payload.type].id}`, context.state[payload.type]);
             context.state[payload.isDisplay] = true;
             await context.dispatch('getOrder')
         },

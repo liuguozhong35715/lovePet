@@ -96,7 +96,7 @@
       </el-pagination>
     </div>
 
-    <el-form ref="form" :model="goodsForm" label-width="80px" v-else>
+    <el-form ref="form" :model="goodsForm" label-width="80px" v-else id="goodsFormStyle">
       <el-form-item label="订单号">
           <el-input v-model="goodsForm.id" disabled></el-input>
         </el-form-item>
@@ -165,7 +165,7 @@ export default {
   margin-bottom: 0;
   width: 50%;
 }
-.el-input {
+#goodsFormStyle .el-input {
   width: 400px;
 }
 
@@ -178,7 +178,7 @@ export default {
   margin-left: 30px;
 }
 
-.demo-form-inline .el-input{
+ .demo-form-inline .el-input{
   width: 200px;
 }
 </style>

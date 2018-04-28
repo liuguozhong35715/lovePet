@@ -105,7 +105,7 @@
       </el-pagination>
     </div>
 
-    <el-form ref="form" :model="petForm" label-width="80px" v-else>
+    <el-form ref="form" :model="petForm" label-width="80px" v-else id="petFormstyle">
       <el-form-item label="订单号">
           <el-input v-model="petForm.id" disabled></el-input>
         </el-form-item>
@@ -172,7 +172,7 @@ export default {
   width: 50%;
 }
 
-.el-input{
+#petFormstyle .el-input{
   width: 400px;
 }
 </style>
