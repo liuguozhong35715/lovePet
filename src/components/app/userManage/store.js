@@ -50,7 +50,7 @@ export default {
             if(search){
                 res = await axios.get(`/shopManagers/?page=${curPage}&rows=${eachPage}&text=${search.text}&type=${search.type}`)
             }else{
-                res = await axios.post(`/shopManagers/?page=${curPage}&rows=${eachPage}`)
+                res = await axios.get(`/shopManagers/?page=${curPage}&rows=${eachPage}`)
             }        
             // const data = await fetch(`/shopManagers/?page=${curPage}&rows=${eachPage}`).then(response => response.json())
             context.commit("getrows",res.data)

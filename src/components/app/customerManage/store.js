@@ -29,14 +29,12 @@ export default {
         }
     },
     actions: {
-        async getMsg(context,search) {
-            
+        async getMsg(context,search) {            
             const { curPage, eachPage } = context.state                 
             let res;
             if(search){
                 res = await axios.get(`/usersManage/?page=${curPage}&rows=${eachPage}&text=${search.text}&type=${search.type}`)
-            }else{
-                
+            }else{                
                 res = await axios.get(`/usersManage/?page=${curPage}&rows=${eachPage}`)
             }        
             // const data = await fetch(`/shopManagers/?page=${curPage}&rows=${eachPage}`).then(response => response.json())

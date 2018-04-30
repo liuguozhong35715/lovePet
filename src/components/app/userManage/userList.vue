@@ -19,7 +19,8 @@
       </el-form>
       <el-table
         :data="filterType"
-        style="width: 100%">
+        style="width: 100%"
+        height="445px">
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" inline class="demo-table-expand">
