@@ -43,8 +43,9 @@
         :data="postId"
         list-type="picture">
         <el-button size="small" type="primary">点击上传</el-button>
-        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>        
       </el-upload>
+      <el-button type="primary" style="margin-top:20px;" @click="submitFanhui()">返回上一级</el-button>
     </div>
   </div>
 </template>
@@ -72,7 +73,7 @@ export default {
     // ...mapMutations("pet",["add"])  获取同步方法
   },
   methods: {     
-    ...mapMutations("pet",["addfn"]),
+    ...mapMutations("pet",["addfn","submitFanhui"]),
     ...mapActions("pet", ["getMsg","postMsg"]), //获取异步方法
     submitForm(formName) {
       this.addfn()

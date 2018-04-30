@@ -82,11 +82,10 @@ export default {
         async changeMsg(context,item) {    //修改
             const { id,manageId, shopName, shopEmployee, shopLicenceNum, shopAdd, shopCorporate, shopTel, shopFeature, shopDes } = item
             await axios.put("/storeManage/" + id,item)   //请求跨域
+            await context.dispatch("getMsg")
         },
-        async searchMsg(context,valueData) {    //搜索
-            console.log(222,valueData)    //get传参数，后面不能用逗号加参数，post可以，必须是？后加参数
+        async searchMsg(context,valueData) {    //搜索   //get传参数，后面不能用逗号加参数，post可以，必须是？后加参数
             await axios.get(`/storeManage/?type=shopName&value=${valueData}`).then(function(res){
-                console.log(999,res.data)
                 context.state.tableData5=res.data;
             })
           

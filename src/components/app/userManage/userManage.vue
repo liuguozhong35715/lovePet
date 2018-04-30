@@ -1,11 +1,12 @@
 <template>
     <el-tabs v-model="activeName" @tab-click="goToList">
-        <el-tab-pane label="用户列表" name="userList" ><router-view></router-view></el-tab-pane>
+        <el-tab-pane label="用户列表" name="userList"  ><router-view></router-view></el-tab-pane>
         <el-tab-pane label="待审核列表" name="userCould" tab-click="goToCould"><router-view></router-view></el-tab-pane>
     </el-tabs> 
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
   name: "userManage",
   data() {
@@ -14,8 +15,10 @@ export default {
     };
   },
   methods: {
+    ...mapMutations("user",["changeType"]),
       goToList(tab, event) {
         this.$router.push(`/info/userManage/${tab.name}`);
+        this.changeType();
       }
     }
 };

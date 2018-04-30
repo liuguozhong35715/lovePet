@@ -6,7 +6,7 @@
     <div v-if="isList">
       <!-- 搜索框 -->
       <div>   
-        <el-input v-model="input" placeholder="请输入内容" style="width:150px"></el-input>
+        <el-input v-model="input" placeholder="请输入店名" style="width:150px"></el-input>
         <el-button type="primary" plain   @click="handleSearch(input)">查询</el-button>
       </div>
        
@@ -17,7 +17,7 @@
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" inline class="demo-table-expand">
-               <el-form-item    label="营业执照图片" style="margin-top:60px;margin-bottom:10px">
+               <el-form-item    label="营业执照图" style="margin-top:60px;margin-bottom:10px">
                 <div style="height:120px;width:120px;border:1px solid red;margin-top:-35px"> 
                     <img :src= props.row.shopLicenceImg alt="" style="height:120px;width:120px;">
                 </div>
@@ -33,12 +33,9 @@
               <el-form-item label="店主ID">
                 <span>{{ props.row.manageId }}</span>
               </el-form-item>
-              <el-form-item label="营业执照号码">
+              <el-form-item label="营业执照号">
                 <span>{{ props.row.shopLicenceNum }}</span>
-              </el-form-item>
-                <el-form-item label="营业地址">
-                <span>{{ props.row.shopAdd }}</span>
-              </el-form-item>          
+              </el-form-item>                         
               <el-form-item label="法人">
                 <span>{{ props.row.shopCorporate }}</span>
               </el-form-item>
@@ -50,6 +47,9 @@
               </el-form-item>
               <el-form-item label="店员属性">
                 <span>{{ props.row.shopEmployee }}</span>
+              </el-form-item>
+              <el-form-item label="描述">
+                <span>{{ props.row.shopDes }}</span>
               </el-form-item>
             </el-form>
           </template>
@@ -63,8 +63,8 @@
           prop="shopName">
         </el-table-column>
         <el-table-column
-          label="描述"
-          prop="shopDes">
+          label="营业地址"
+          prop="shopAdd">
         </el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">

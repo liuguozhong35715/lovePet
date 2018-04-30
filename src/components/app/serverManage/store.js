@@ -19,7 +19,7 @@ const store = {
             servicePrice: "",
             theStores: "",
             storeId:"0ae0cd0d0b000000dcdffc00",//门店ID
-            manageId:"9ae9cd9d9b999999dcdffc99"//管理员ID
+            manageId: sessionStorage.userId//管理员ID
         },
         update: {
             serviceName: "",

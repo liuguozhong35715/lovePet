@@ -13,14 +13,12 @@
       <el-form-item label="营业地址">
         <el-input v-model="formLabelAlign.shopAdd" style="width: 400px;"></el-input>
       </el-form-item>
-
       <el-form-item label="法人">
         <el-input v-model="formLabelAlign.shopCorporate" style="width: 400px;"></el-input>
       </el-form-item>
       <el-form-item label="联系电话">
         <el-input v-model="formLabelAlign.shopTel" style="width: 400px;"></el-input>
       </el-form-item>
-
       <el-form-item label="特色">
         <el-input v-model="formLabelAlign.shopFeature" style="width: 400px;"></el-input>
       </el-form-item>

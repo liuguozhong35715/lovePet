@@ -34,6 +34,9 @@ export default {
         this.state.pet.formMsg.price=rows.price
         this.state.pet.formMsg.coatColor=rows.coatColor
         this.state.pet.formMsg.id=rows._id
+      },
+      submitFanhui(state){
+        state.isList = true;
       }
     },
     actions: {
