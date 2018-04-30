@@ -4,10 +4,6 @@
    <!-- <h1>新增列表</h1> -->
   <div v-if="isAdd">
     <el-form :label-position="labelPosition" ref="ruleForm2" label-width="100px" :model="formLabelAlign">
-  
-      <el-form-item label="店主ID">
-        <el-input v-model="formLabelAlign.manageId" style="width: 400px;" :disabled="true"></el-input>
-      </el-form-item>
       <el-form-item label="门店名称">
         <el-input v-model="formLabelAlign.shopName" style="width: 400px;"></el-input>
       </el-form-item>    
@@ -57,11 +53,9 @@
         </el-select>    
       </div>
       <el-button size="small" type="primary">点击上传</el-button>
-     
-           
       <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
     </el-upload>
-        <el-button type="primary" style="margin-top:20px;" @click="submitFanhui()">返回用户列表</el-button>
+        <el-button type="primary" style="margin-top:20px;" @click="submitFanhui()">返回上一级</el-button>
   </div>
  
 </div>
@@ -71,27 +65,9 @@
 import { mapState, mapActions, mapMutations } from "vuex";
 import storeListVue from './storeList.vue';
 export default {
-  // data() {
-  // return {
-  // labelPosition: 'right',
-  // formLabelAlign: {
-  //   shopName: '',
-  //   manageId: '',
-  //   shopLicenceNum: '',   //营业执照号码
-  //   shopLicenceImg: '',//营业执照图片
-  //   shopAdd: '',//营业地址
-  //   shopCorporate: '',//法人
-  //   shopTel: '', //联系电话
-  //   shopTel: '',//头图
-  //   shopFeature: '',//特色
-  //   shopEmployee: '',//店员属性
-  //   shopDes:''
-
-  // }
-  // };
-  // },
   computed: {
-    ...mapState("storeManage", [
+    ...mapState(
+      "storeManage", [
       "labelPosition",
       "formLabelAlign",
       "isAdd",
@@ -102,11 +78,9 @@ export default {
   },
   methods: {
     ...mapActions("storeManage", ["postMsg","getMsg"]),
+    ...mapMutations("storeManage", ["submitFanhui"]),
     submitForm(formName) {  //提交
       this.postMsg();   //控制新增的某个列表的出现
-    },
-    submitFanhui(){  //返回到用户列表
-      this.$router.push({path:'/info/storeManage/storeList'})
     },
     resetForm(formName) {
       //重置

@@ -123,7 +123,7 @@ export default {
                 goodsIntro: context.state.form.goodsIntro,
                 goodsPrice: context.state.form.goodsPrice,
                 goodsImg: context.state.form.goodsImg,
-                manageId: "5ae0399f8392ba3330a58680"
+                manageId: sessionStorage.userId
             };
             axios.post("/goodsManage/", obj).then(function (res) {
                 context.state.goodsId.id = res.data._id;

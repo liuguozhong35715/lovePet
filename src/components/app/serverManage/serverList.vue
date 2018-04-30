@@ -13,7 +13,7 @@
     </div>
     <el-table
       :data="service"
-      height="530"
+      height="500px"
       style="width: 100%">
       <el-table-column type="expand">
         <template slot-scope="props">

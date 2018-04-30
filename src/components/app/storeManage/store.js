@@ -24,7 +24,7 @@ export default {
         
         formLabelAlign: {       //增加的信息
               shopName: '',
-            manageId: '5ae17ec646f20cde65de9f69',
+              manageId: sessionStorage.userId,
               shopLicenceNum: '',   //营业执照号码
               shopLicenceImg: '',//营业执照图片
               shopAdd: '',//营业地址
@@ -54,6 +54,12 @@ export default {
         },
         searchData(){
 
+        },        
+        submitFanhui(state){  //返回到用户列表
+            state.isAdd = true;
+        },
+        backList(state){
+            state.isList= true;
         }
   
     },

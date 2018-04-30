@@ -24,9 +24,7 @@ export default {
           this.state.pet.tableData5 = parm
       },
       addfn(state){
-        console.log("增加")
       state.isList = false;
-      console.log(state.isList)
     },
       updet(state,rows){
         state.isAdd = !state.isAdd
@@ -51,12 +49,10 @@ export default {
         },
         async postMsg(context,storeDate){  //新增
             const { data } = await axios.post("/pets",storeDate)
-            console.log(data)
             context.state.postId.putId = data._id;
         },
         async deletMsg(context,id){  //删除
             await axios.delete("/pets/"+ id)
-            console.log(222)
         },
         async updetMsg(context,updetid){  //修改
             await axios.put("/pets/"+ updetid)

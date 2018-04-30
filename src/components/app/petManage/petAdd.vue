@@ -5,8 +5,7 @@
           <el-form   label-width="80px" :model="formLabelAlign">
           <el-form-item label="门店管理"  style="width:500px">
               <el-input
-                  placeholder="5ae1a36216886b0fbe29c62f"
-                  v-model="input1"
+                  v-model="formLabelAlign.inputID"
                   :disabled="true">
               </el-input>
           </el-form-item>
@@ -55,7 +54,7 @@ export default {
   name: "petAdd",
   data() {
     return {
-      input: "5ae1a36216886b0fbe29c62f",
+      
       formLabelAlign: {
         id: "",
         variety: "",
@@ -63,7 +62,8 @@ export default {
         gender: "",
         price: "",
         coatColor: "",
-        img:""
+        img:"",
+        inputID: sessionStorage.userId,
       }
     };
   },
@@ -75,14 +75,12 @@ export default {
     ...mapMutations("pet",["addfn"]),
     ...mapActions("pet", ["getMsg","postMsg"]), //获取异步方法
     submitForm(formName) {
-      console.log("error",this.isList)
       this.addfn()
       this.postMsg( this.formLabelAlign)
       // this.$store.dispatch("pet/postMsg", this.formLabelAlign);
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
-      console.log(123, this.$refs[formName]);
     }
   }
 };

@@ -1,7 +1,7 @@
 <template>
  
 
-  <div style="height:900px" >
+  <div>
    
     <div v-if="isList">
       <!-- 搜索框 -->
@@ -85,21 +85,13 @@
          ref="ruleForm2" 
          label-width="100px" 
          :model="formLabelAlign2"
-         style=500px
         >
-      <el-form-item label="店主ID">
-        <el-input v-model="formLabelAlign2.manageId" style="width: 400px;" :disabled="true"></el-input>
-      </el-form-item>
       <el-form-item label="门店名称">
         <el-input v-model="formLabelAlign2.shopName" style="width: 400px;"></el-input>
-      </el-form-item>    
-      <el-form-item label="营业执照号码">
-        <el-input v-model="formLabelAlign2.shopLicenceNum" style="width:400px;" :disabled="true"></el-input>
-      </el-form-item>
+      </el-form-item> 
       <el-form-item label="营业地址">
         <el-input v-model="formLabelAlign2.shopAdd" style="width: 400px;"></el-input>
       </el-form-item>
-
       <el-form-item label="法人">
         <el-input v-model="formLabelAlign2.shopCorporate" style="width: 400px;"></el-input>
       </el-form-item>
@@ -158,7 +150,7 @@ export default {
    
   methods: {
     //方法
-    ...mapMutations("storeManage", ["getIsList", "getObj"]), //同步
+    ...mapMutations("storeManage", ["getIsList", "getObj","backList"]), //同步
     ...mapActions("storeManage", ["changeMsg"]), //异步
     handleDelete(index, row) {
       //删除  index是下标  row是列表里面的信息
@@ -185,8 +177,7 @@ export default {
     },
     submitSave(formName) { //保存
       this.$store.dispatch("storeManage/changeMsg",this.formLabelAlign2)
-    //  console.log(11,this.formLabelAlign2)
-      this.$router.push({path:'/info/storeManage/storeAdd'})
+      this.backList();
       // this.islist=true
     },
     handleSearch(value){ //搜索

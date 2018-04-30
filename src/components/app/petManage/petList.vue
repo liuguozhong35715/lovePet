@@ -4,7 +4,7 @@
   <div v-if="isAdd" >
     <el-table
       :data="tableData5"
-     
+      height="500px"
       style="width: 100%">
       <el-table-column type="expand">
         <template slot-scope="props">
