@@ -71,7 +71,8 @@ export default {
             await context.dispatch("getMsg")  //触发 获取的
         },
         async getMsg(context) {    //获取
-            const res = await axios.get("/storeManage")   //请求跨域
+            let userId = sessionStorage.userId;
+            const res = await axios.get(`/storeManage?shopManagersId=${userId}`)   //请求跨域
   
             context.commit("getshops", res.data)
         },

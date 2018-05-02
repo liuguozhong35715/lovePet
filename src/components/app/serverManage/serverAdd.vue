@@ -26,8 +26,8 @@
         
         <el-form-item label="所属门店" prop="theStores">
           <el-select style="width:45%" v-model="add.theStores">
-            <el-option label="抚琴东路店" value="抚琴东路店"></el-option>
-            <el-option label="宽窄巷子店" value="宽窄巷子店"></el-option>
+            <el-option :label="item.shopName" :value="item._id"  v-for="item in storeArr" :key="item._id"></el-option>
+            <!-- <el-option label="宽窄巷子店" value="宽窄巷子店"></el-option> -->
           </el-select>
         </el-form-item>
 
@@ -157,11 +157,14 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
-    ...mapActions("server", ["submitForm"]),
+    ...mapActions("server", ["submitForm","getStore"]),
     ...mapMutations("server", ["sureadd"])
   },
   computed: {
-    ...mapState("server", ["add", "isAdd"])
+    ...mapState("server", ["add", "isAdd","storeArr"])
+  },
+  created(){
+    this.getStore()
   }
 };
 </script>

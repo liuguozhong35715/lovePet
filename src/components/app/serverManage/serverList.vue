@@ -13,7 +13,7 @@
     </div>
     <el-table
       :data="service"
-      height="500px"
+      height="500"
       style="width: 100%">
       <el-table-column type="expand">
         <template slot-scope="props">
@@ -115,8 +115,9 @@
 
       <el-form-item label="所属门店" prop="theStores">
         <el-select style="width:45%" v-model="update.theStores" placeholder="请选择具体门店">
-          <el-option label="抚琴东路店" value="抚琴东路店"></el-option>
-          <el-option label="宽窄巷子店" value="宽窄巷子店"></el-option>
+            <el-option :label="item.shopName" :value="item._id"  v-for="item in storeArr" :key="item._id"></el-option>
+          <!-- <el-option label="抚琴东路店" value="抚琴东路店"></el-option> -->
+          <!-- <el-option label="宽窄巷子店" value="宽窄巷子店"></el-option> -->
         </el-select>
       </el-form-item>
 
@@ -157,14 +158,14 @@ export default {
   name: "server",
   methods: {
     ...mapActions("server", ["getPet"]),
-    ...mapActions("server", ["deleteRow","sure","search"]),
+    ...mapActions("server", ["deleteRow","sure","search","getStore"]),
     ...mapMutations("server", ["updateRow","resetForm"])
   },
   created() {
     this.getPet();
   },
   computed: {
-    ...mapState("server", ["service","isList","update","select","input"])
+    ...mapState("server", ["service","isList","update","select","input","storeArr"])
   }
 };
 </script>

@@ -98,8 +98,9 @@ export default {
         async getMsg(context) {
             // console.log("context",context)
             const { curpage, eachpage } = context.state
+            let userId = sessionStorage.userId;
             // console.log(curpage, eachpage)
-            const data = await fetch(`/goodsManage?page=${curpage}&rows=${eachpage}`).then(response => response.json())
+            const data = await fetch(`/goodsManage?page=${curpage}&rows=${eachpage}&shopManagersId=${userId}`).then(response => response.json())
             context.commit("renderMsg", data)
         },
 

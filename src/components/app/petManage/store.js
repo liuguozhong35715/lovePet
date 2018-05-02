@@ -2,7 +2,7 @@ import axios from 'axios'
 export default {
     namespaced: true,  //命名空间
     state:{
-        tableData5:[{}],
+        tableData5:[],
         isAdd:true,
         isList:true,
         dynamicValidateForm:{},
@@ -43,11 +43,11 @@ export default {
         async edit(context ) {   //确认修改
             let xinxi = context.state.formMsg
             context.state.isAdd = !context.state.isAdd
-            await axios.put("/pets",xinxi)
-            
+            await axios.put("/pets",xinxi)            
         },
         async getMsg(context ) {   //把数据库的数据渲染到页面
-            const {data} = await axios.get("/pets")    
+            let userId = sessionStorage.userId;
+            const {data} = await axios.get(`/pets?shopManagersId=${userId}`) 
             context.commit("getlist",data)
         },
         async postMsg(context,storeDate){  //新增

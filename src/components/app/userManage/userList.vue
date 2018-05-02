@@ -20,28 +20,7 @@
       <el-table
         :data="filterType"
         style="width: 100%"
-        height="445px">
-        <el-table-column type="expand">
-          <template slot-scope="props">
-            <el-form label-position="left" inline class="demo-table-expand">
-              <el-form-item label="店铺名称">
-                {{props.row.shop}}
-              </el-form-item>
-              <el-form-item label="店铺 Id">
-                {{props.row.shop}}
-              </el-form-item>
-              <el-form-item label="注册日期">
-                {{props.row.shop}}
-              </el-form-item>
-              <el-form-item label="商品分类">
-                {{props.row.shop}}
-              </el-form-item>
-              <el-form-item label="店铺地址">
-                {{props.row.shop}}
-              </el-form-item>
-            </el-form>
-          </template>
-        </el-table-column>
+        height="445px">        
         <el-table-column
           align="center"
           label="登录名"

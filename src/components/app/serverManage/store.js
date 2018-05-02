@@ -5,12 +5,11 @@ const store = {
         isList: true,
         isAdd: true,
         service: [],
-        // select:"",
-        select:{
-            sel:""
+        select: {
+            sel: ""
         },
-        input:{
-            zhi:""
+        input: {
+            zhi: ""
         },
         add: {
             serviceName: "",
@@ -18,7 +17,7 @@ const store = {
             serviceTime: "",
             servicePrice: "",
             theStores: "",
-            storeId:"0ae0cd0d0b000000dcdffc00",//门店ID
+            storeId: "0ae0cd0d0b000000dcdffc00",//门店ID
             manageId: sessionStorage.userId//管理员ID
         },
         update: {
@@ -29,50 +28,50 @@ const store = {
             theStores: "",
             id: ""
         },
+        storeArr:[]  //门店      
     },
     mutations: {
         addPet(state, parm) {
-            // let isFlag
-            if(this.state.server.select.sel == "服务名称")
-            {
-                // isFlag = "serviceName"
-                if(this.state.server.input.zhi){
-                    for(let i = 0; i < parm.length; i++){
-                        if(parm[i].serviceName == this.state.server.input.zhi){
-                            this.state.server.service.push(parm[i])
+            // for (let i = 0; i < parm.length; i++) {
+                // if (parm[i].manageId == "9ae9cd9d9b999999dcdffc98") {
+                    if (this.state.server.select.sel == "服务名称") {
+                        if (this.state.server.input.zhi) {
+                            for (let i = 0; i < parm.length; i++) {
+                                if (parm[i].serviceName == this.state.server.input.zhi) {
+                                    this.state.server.service.push(parm[i])
+                                }
+                            }
+                        }
+                        else {
+                            this.state.server.service = parm
                         }
                     }
-                }
-                else{
-                    this.state.server.service = parm            
-                }
-            }
-            else if(this.state.server.select.sel == "服务类型"){
-                // isFlag = "serviceType"
-                if(this.state.server.input.zhi){
-                    for(let i = 0; i < parm.length; i++){
-                        if(parm[i].serviceType == this.state.server.input.zhi){
-                            this.state.server.service.push(parm[i])
+                    else if (this.state.server.select.sel == "服务类型") {
+                        if (this.state.server.input.zhi) {
+                            for (let i = 0; i < parm.length; i++) {
+                                if (parm[i].serviceType == this.state.server.input.zhi) {
+                                    this.state.server.service.push(parm[i])
+                                }
+                            }
+                        }
+                        else {
+                            this.state.server.service = parm
                         }
                     }
-                }
-                else{
-                    this.state.server.service = parm            
-                }
-            }else{
-                // isFlag = "servicePrice"  
-                if(this.state.server.input.zhi){
-                    for(let i = 0; i < parm.length; i++){
-                        if(parm[i].servicePrice == this.state.server.input.zhi){
-                            this.state.server.service.push(parm[i])
+                    else {
+                        if (this.state.server.input.zhi) {
+                            for (let i = 0; i < parm.length; i++) {
+                                if (parm[i].servicePrice == this.state.server.input.zhi) {
+                                    this.state.server.service.push(parm[i])
+                                }
+                            }
+                        }
+                        else {
+                            this.state.server.service = parm
                         }
                     }
-                }  
-                else{
-                    this.state.server.service = parm            
-                }            
-            }
-            // console.log("zhizhizhi:",isFlag)            
+            //     }
+            // }
         },
         updateRow(state, rows) {//点击修改
             state.isList = !state.isList;
@@ -93,16 +92,28 @@ const store = {
             this.state.server.add.serviceTime = ""
             this.state.server.add.servicePrice = ""
             this.state.server.add.theStores = ""
+        },
+        setStore(state,data){//门店
+            state.storeArr = data;
         }
     },
     actions: {
-        async search(context){
+        //获取门店
+        async getStore(context) {
+            let id = sessionStorage.userId;
+            // console.log(id)
+            const { data } = await axios(`/serverManage/search?id=${id}`);
+            context.commit("setStore", data);     
+        },
+        //搜索
+        async search(context) {
             context.state.service = []
             await context.dispatch('getPet');
         },
         //显示
         async getPet(context) {
-            const { data } = await axios("/serverManage");
+            let id = sessionStorage.userId;            
+            const { data } = await axios(`/serverManage?id=${id}`);
             context.commit("addPet", data);
         },
         // 增加

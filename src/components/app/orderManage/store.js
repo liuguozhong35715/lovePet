@@ -161,9 +161,7 @@ export default {
         async getOrder(context) {
             let userId = sessionStorage.userId;
             let userType = sessionStorage.userType;
-            console.log(userId, userType)
             if (userType == 0) {
-                console.log("in")
                 const { data } = await axios.get(`/orderManage?type=0&shopManagersId=${userId}`);
                 context.state.allData = data;
                 context.commit("showDataAll", data)
