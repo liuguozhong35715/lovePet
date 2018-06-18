@@ -15,9 +15,9 @@ export default new Vuex.Store({
         customer,
         commodity,
         order,
+        storeManage,
         server,
         pet,
-        storeManage,
         user
     }
 })
